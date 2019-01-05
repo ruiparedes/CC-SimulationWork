@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <math.h>
 #define Infinito 10000000.0
-int matriz [300][5];
+int matriz [300][6];
 
 /*
  * 
@@ -56,6 +56,21 @@ int printRandoms(int lower, int upper) {
     int num = (rand() % (upper - lower + 1)) + lower;
     return num;
 }
+
+
+void clientesPrioritarios(int totalClientes, int nClientesPrioritarios){
+    for(int i = 0; i<totalClientes; i++){
+        if(nClientesPrioritarios !=0){
+            matriz[i][5] = 1;
+            nClientesPrioritarios--;
+        }
+        else{
+            matriz[i][5] = 0;
+        }
+    }
+    shuffle(5, totalClientes);
+}
+
 
 void tempoLevantamentoClientes(int nClientesLevantaram, int totalClientes, int nClientesTL1, int nClientesTL2, int nClientesTL3, int nClientesTL4) {
     int tempoLevantamento = 0;
@@ -228,6 +243,9 @@ int main(int argc, char** argv) {
         int diferenca = nClientesLevantaram - (nClientesTL1 + nClientesTL2 + nClientesTL3 + nClientesTL4);
         nClientesTL2 = nClientesTL2 + diferenca;
     }
+    
+    int nClientesPrioritarios = trunc(0.05 * totalClientes);
+    
 
 
     srand(time(NULL));
@@ -236,19 +254,20 @@ int main(int argc, char** argv) {
     tempoAtendimentoClientes(totalClientes, clientesTa1, clientesTa2, clientesTa3, clientesTa4, clientesTa5);
     tempoPagamentoClientes(nClientesCompram, totalClientes, nClientesTP1, nClientesTP2, nClientesTP3, nClientesTP4);
     tempoLevantamentoClientes(nClientesLevantaram, totalClientes, nClientesTL1, nClientesTL2, nClientesTL3, nClientesTL4);
+    clientesPrioritarios(totalClientes,nClientesPrioritarios);
 
     for (int i = 0; i < totalClientes; i++) {
-        printf("\n Cliente %d: [%d][%d][%d][%d]", matriz[i][0], matriz[i][1], matriz[i][2], matriz[i][3], matriz[i][4]);
+        printf("\n Cliente %d: [%d][%d][%d][%d][%d]", matriz[i][0], matriz[i][1], matriz[i][2], matriz[i][3], matriz[i][4], matriz[i][5]);
     }
-/*
+
     int count = 0;
     for (int i = 0; i < totalClientes; i++) {
-        if (matriz[i][4] != -1) {
+        if (matriz[i][5] ==1 ) {
             count++;
         }
     }
     printf("\n %d", count);
-*/
+
 
     return (EXIT_SUCCESS);
 }
