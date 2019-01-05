@@ -30,6 +30,28 @@ void shuffle(int index, int totalClientes) {
     }
 }
 
+void shuffle2(int index, int totalClientes) {
+    for (int i = 0; i < totalClientes - 1; i++) {
+        if (matriz[i][index] != -1) {
+/*
+            printf("Valor da Matriz i[%d][%d]: %d || ", i, index, matriz[i][index]);
+*/
+            int j = i + rand() / (RAND_MAX / (totalClientes - i) + 1);
+            
+            while (matriz[j][index] == -1) {
+                j = i + rand() / (RAND_MAX / (totalClientes - i) + 1);
+            }
+/*
+            printf("Valor da Matriz j[%d][%d]: %d \n", j, index, matriz[j][index]);
+            printf("Fez while %d vezes \n", count);
+*/
+            int t = matriz[j][index];
+            matriz[j][index] = matriz[i][index];
+            matriz[i][index] = t;
+        }
+    }
+}
+
 int printRandoms(int lower, int upper) {
     int num = (rand() % (upper - lower + 1)) + lower;
     return num;
@@ -41,36 +63,34 @@ void tempoLevantamentoClientes(int nClientesLevantaram, int totalClientes, int n
     for (int j = 0; j < totalClientes; j++) {
         matriz[j][4] = -1;
     }
-    int countLevantaram =0;
+    int countLevantaram = 0;
     for (int k = 0; k < totalClientes; k++) {
         if (matriz[k][3] != -1) {
-                if (nClientesTL1 != 0) {
-                    tempoLevantamento = printRandoms(0, 299);
-                    matriz[k][4] = tempoLevantamento;
-                    nClientesTL1--;
-                    printf("\n L1 %d Cliente: %d", nClientesTL1, k);
-                } else if (nClientesTL2 != 0) {
-                    tempoLevantamento = printRandoms(300, 599);
-                    matriz[k][4] = tempoLevantamento;
-                    nClientesTL2--;
-                    printf("\n L2 %d Cliente: %d", nClientesTL2, k);
-                } else if (nClientesTL3 != 0) {
-                    tempoLevantamento = printRandoms(600, 899);
-                    matriz[k][4] = tempoLevantamento;
-                    nClientesTL3--;
-                    printf("\n L3 %d Cliente: %d", nClientesTL3, k);
-                } else if (nClientesTL4 != 0) {
-                    tempoLevantamento = printRandoms(900, 1200);
-                    matriz[k][4] = tempoLevantamento;
-                    nClientesTL4--;
-                    printf("\n L4 %d Cliente: %d", nClientesTL4, k);
-                }
-                countLevantaram++;
-                if(countLevantaram==nClientesLevantaram){
-                    break;
-                }
+            if (nClientesTL1 != 0) {
+                tempoLevantamento = printRandoms(0, 299);
+                matriz[k][4] = tempoLevantamento;
+                nClientesTL1--;
+
+            } else if (nClientesTL2 != 0) {
+                tempoLevantamento = printRandoms(300, 599);
+                matriz[k][4] = tempoLevantamento;
+                nClientesTL2--;
+            } else if (nClientesTL3 != 0) {
+                tempoLevantamento = printRandoms(600, 899);
+                matriz[k][4] = tempoLevantamento;
+                nClientesTL3--;
+            } else if (nClientesTL4 != 0) {
+                tempoLevantamento = printRandoms(900, 1200);
+                matriz[k][4] = tempoLevantamento;
+                nClientesTL4--;
+            }
+            countLevantaram++;
+            if (countLevantaram == nClientesLevantaram) {
+                break;
+            }
         }
     }
+    shuffle2(4, totalClientes);
 }
 
 void tempoPagamentoClientes(int nClientesCompram, int totalClientes, int nClientesTP1, int nClientesTP2, int nClientesTP3, int nClientesTP4) {
@@ -209,8 +229,6 @@ int main(int argc, char** argv) {
         nClientesTL2 = nClientesTL2 + diferenca;
     }
 
-    printf("Clientes levantaram: %d", nClientesLevantaram);
-    printf("Soma: %d", nClientesTL1 + nClientesTL2 + nClientesTL3 + nClientesTL4);
 
     srand(time(NULL));
 
@@ -222,6 +240,7 @@ int main(int argc, char** argv) {
     for (int i = 0; i < totalClientes; i++) {
         printf("\n Cliente %d: [%d][%d][%d][%d]", matriz[i][0], matriz[i][1], matriz[i][2], matriz[i][3], matriz[i][4]);
     }
+/*
     int count = 0;
     for (int i = 0; i < totalClientes; i++) {
         if (matriz[i][4] != -1) {
@@ -229,6 +248,7 @@ int main(int argc, char** argv) {
         }
     }
     printf("\n %d", count);
+*/
 
     return (EXIT_SUCCESS);
 }
