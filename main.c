@@ -251,10 +251,9 @@ void tempoChegadaClientes(int totalClientes, int cPrimeiroP, int cSegundoP, int 
 
 }
 
-void inicializacao(int *clock, int *evento, int *nrCliente, int *tempoProximaChegada, int *estadoPA1, int *estadoPA2, int *estadoPA3, int *estadoPA4, int *estadoPA5, int *estadoPA6, int *estadoPA7, int *estadoPA8, int *estadoPA9, int *estadoPA10, int *tPartidaPA1, int *tPartidaPA2, int *tPartidaPA3, int *tPartidaPA4, int *tPartidaPA5, int *tPartidaPA6, int *tPartidaPA7, int *tPartidaPA8, int *tPartidaPA9, int *tPartidaPA10, int *estadoPP1, int *estadoPP2, int *estadoPP3, int *estadoPP4, int *tPartidaPP1, int *tPartidaPP2, int *tPartidaPP3, int *tPartidaPP4, int *estadoPL1, int *estadoPL2, int *tempoPartidaPL1, int *tempoPartidaPL2, int *tempoEspera, int **filaPAtendimento, int **filaPP1, int **filaPP2, int **filaPP3, int **filaPP4, int **filaPLevantamento) {
+void inicializacao(int *clock, int *nrCliente, int *tempoProximaChegada, int *estadoPA1, int *estadoPA2, int *estadoPA3, int *estadoPA4, int *estadoPA5, int *estadoPA6, int *estadoPA7, int *estadoPA8, int *estadoPA9, int *estadoPA10, int *tPartidaPA1, int *tPartidaPA2, int *tPartidaPA3, int *tPartidaPA4, int *tPartidaPA5, int *tPartidaPA6, int *tPartidaPA7, int *tPartidaPA8, int *tPartidaPA9, int *tPartidaPA10, int *estadoPP1, int *estadoPP2, int *estadoPP3, int *estadoPP4, int *tPartidaPP1, int *tPartidaPP2, int *tPartidaPP3, int *tPartidaPP4, int *estadoPL1, int *estadoPL2, int *tempoPartidaPL1, int *tempoPartidaPL2, int *tempoEspera, int **filaPAtendimento, int **filaPP1, int **filaPP2, int **filaPP3, int **filaPP4, int **filaPLevantamento) {
 
     *clock = 0;
-    *evento = 0;
     *nrCliente = matriz[0][0];
     *tempoProximaChegada = matriz[0][1];
     *estadoPA1 = 0;
@@ -301,55 +300,46 @@ void inicializacao(int *clock, int *evento, int *nrCliente, int *tempoProximaChe
 }
 
 void gestaoTempo(int tempoProximaChegada, int tPartidaPA1, int tPartidaPA2, int tPartidaPA3, int tPartidaPA4, int tPartidaPA5, int tPartidaPA6, int tPartidaPA7, int tPartidaPA8, int tPartidaPA9, int tPartidaPA10, int *clock, int *evento) {
+    int clockAtual = *clock;
     *clock = tempoProximaChegada;
     *evento = 0; //Chegada
-    if (tPartidaPA1 < *clock) {
-        *clock = tPartidaPA1;
+    if ( tPartidaPA1 < *clock) {
+        *clock =  tPartidaPA1;
         *evento = 1;
-    }
-    if (tPartidaPA2 < *clock) {
-        *clock = tPartidaPA2;
+    } else if ( tPartidaPA2 < *clock) {
+        *clock =  tPartidaPA2;
         *evento = 2;
-    }
-    if (tPartidaPA3 < *clock) {
-        *clock = tPartidaPA3;
+    } else if ( tPartidaPA3 < *clock) {
+        *clock =  tPartidaPA3;
         *evento = 3;
-    }
-    if (tPartidaPA4 < *clock) {
-        *clock = tPartidaPA4;
+    } else if ( tPartidaPA4 < *clock) {
+        *clock =  tPartidaPA4;
         *evento = 4;
-    }
-    if (tPartidaPA5 < *clock) {
-        *clock = tPartidaPA5;
+    } else if ( tPartidaPA5 < *clock) {
+        *clock =  tPartidaPA5;
         *evento = 5;
-    }
-    if (tPartidaPA6 < *clock) {
-        *clock = tPartidaPA6;
+    } else if ( tPartidaPA6 < *clock) {
+        *clock =  tPartidaPA6;
         *evento = 6;
-    }
-    if (tPartidaPA7 < *clock) {
-        *clock = tPartidaPA7;
+    } else if ( tPartidaPA7 < *clock) {
+        *clock =  tPartidaPA7;
         *evento = 7;
-    }
-    if (tPartidaPA8 < *clock) {
-        *clock = tPartidaPA8;
+    } else if ( tPartidaPA8 < *clock) {
+        *clock =  tPartidaPA8;
         *evento = 8;
-    }
-    if (tPartidaPA9 < *clock) {
-        *clock = tPartidaPA9;
+    } else if ( tPartidaPA9 < *clock) {
+        *clock =  tPartidaPA9;
         *evento = 9;
-    }
-    if (tPartidaPA10 < *clock) {
-        *clock = tPartidaPA10;
+    } else if ( tPartidaPA10 < *clock) {
+        *clock =  tPartidaPA10;
         *evento = 10;
-    }
-    if (*clock == Infinito) {
+    } else if (*clock == Infinito) {
         *evento = -1;
     }
 }
 
 void eventoChegada(int *cliente, int tempo, int *estadoPA1, int *estadoPA2, int *estadoPA3, int *estadoPA4, int *estadoPA5, int *estadoPA6, int *estadoPA7, int *estadoPA8, int *estadoPA9, int *estadoPA10, int **filaPVendedores, int *tempoProximaChegada, int *tPartidaPA1, int *tPartidaPA2, int *tPartidaPA3, int *tPartidaPA4, int *tPartidaPA5, int *tPartidaPA6, int *tPartidaPA7, int *tPartidaPA8, int *tPartidaPA9, int *tPartidaPA10, int *nrClienteOcupaPA1, int *nrClienteOcupaPA2, int *nrClienteOcupaPA3, int *nrClienteOcupaPA4, int *nrClienteOcupaPA5, int *nrClienteOcupaPA6, int *nrClienteOcupaPA7, int *nrClienteOcupaPA8, int *nrClienteOcupaPA9, int *nrClienteOcupaPA10) {
-    *tempoProximaChegada = matriz[*cliente][1];
+    *tempoProximaChegada = matriz[*cliente+1][1];
 
     if (*estadoPA1 == 1) {
         if (*estadoPA2 == 1) {
@@ -412,7 +402,7 @@ void eventoChegada(int *cliente, int tempo, int *estadoPA1, int *estadoPA2, int 
         *tPartidaPA1 = tempo + matriz[*cliente][2];
         *nrClienteOcupaPA1 = *cliente;
     }
-    *cliente = *cliente +1;
+    *cliente = *cliente + 1;
 }
 
 void eventoPartidaPA1(int *nrClienteOcupaPA1, int tempo, int *estadoPA1, int **filaPVendedores, int *tPartidaPA1, int *tempoEspera) {
@@ -558,7 +548,7 @@ void eventoPartidaPA9(int *nrClienteOcupaPA9, int tempo, int *estadoPA9, int **f
         *estadoPA9 = 0;
         *tPartidaPA9 = Infinito;
     } else {
-       clienteNaFila = Front(*filaPVendedores);
+        clienteNaFila = Front(*filaPVendedores);
         tempoChegadaCliente = matriz[clienteNaFila][1];
         tempoEsperaCliente = tempo - tempoChegadaCliente;
         *nrClienteOcupaPA9 = clienteNaFila;
@@ -593,15 +583,7 @@ int main(int argc, char** argv) {
             estadoPP1, estadoPP2, estadoPP3, estadoPP4, tPartidaPP1, tPartidaPP2, tPartidaPP3, tPartidaPP4, estadoPL1, estadoPL2, tempoPartidaPL1, tempoPartidaPL2, tempoEspera;
 
     int *filaPVendedores, *filaPP1, *filaPP2, *filaPP3, *filaPP4, *filaPLevantamento;
-    int cliente = 0 , nrClienteOcupaPA1, nrClienteOcupaPA2,nrClienteOcupaPA3, nrClienteOcupaPA4, nrClienteOcupaPA5, nrClienteOcupaPA6, nrClienteOcupaPA7, nrClienteOcupaPA8, nrClienteOcupaPA9, nrClienteOcupaPA10;
-    
-
-
-    //Percentagens intervalos de tempo
-    float percPrimeiroP = 0.1;
-    float percSegundoP = 0.3;
-    float percTerceiroP = 0.15;
-    float percQuartoP = 0.45;
+    int cliente = 0, nrClienteOcupaPA1, nrClienteOcupaPA2, nrClienteOcupaPA3, nrClienteOcupaPA4, nrClienteOcupaPA5, nrClienteOcupaPA6, nrClienteOcupaPA7, nrClienteOcupaPA8, nrClienteOcupaPA9, nrClienteOcupaPA10;
 
     //Inserção nr Clientes
     int totalClientes = 0;
@@ -609,10 +591,15 @@ int main(int argc, char** argv) {
     scanf("%d", &totalClientes);
 
     //calculo clientes para cada intervalo de tempo
-    int clientesPrimeiroP = trunc(percPrimeiroP * totalClientes);
-    int clientesSegundoP = trunc(percSegundoP * totalClientes);
-    int clientesTerceiroP = trunc(percTerceiroP * totalClientes);
-    int clientesQuartoP = trunc(percQuartoP * totalClientes);
+    int clientesPrimeiroP = trunc(0.1 * totalClientes);
+    int clientesSegundoP = trunc(0.3 * totalClientes);
+    int clientesTerceiroP = trunc(0.15 * totalClientes);
+    int clientesQuartoP = trunc(0.45 * totalClientes);
+    if (totalClientes > clientesPrimeiroP + clientesSegundoP + clientesTerceiroP + clientesQuartoP) {
+        int soma = clientesPrimeiroP + clientesSegundoP + clientesTerceiroP + clientesQuartoP;
+        int dif = totalClientes - soma;
+        clientesQuartoP = clientesQuartoP + dif;
+    }
 
     //calculo clientes para cada intervalo tempo atendimento
     int clientesTa1 = trunc(0.1 * totalClientes);
@@ -621,11 +608,24 @@ int main(int argc, char** argv) {
     int clientesTa4 = trunc(0.2 * totalClientes);
     int clientesTa5 = trunc(0.05 * totalClientes);
 
+    if (totalClientes > clientesTa1 + clientesTa2 + clientesTa3 + clientesTa4 + clientesTa5) {
+        int soma = clientesTa1 + clientesTa2 + clientesTa3 + clientesTa4 + clientesTa5;
+        int dif = totalClientes - soma;
+        clientesTa2 = clientesTa2 + dif;
+    }
+
     int nClientesCompram = trunc(0.8 * totalClientes);
     int nClientesTP1 = trunc(0.15 * nClientesCompram); //Nota: Faltavam 5%, adicionados aos 0.10
     int nClientesTP2 = trunc(0.25 * nClientesCompram);
     int nClientesTP3 = trunc(0.4 * nClientesCompram);
     int nClientesTP4 = trunc(0.20 * nClientesCompram);
+
+    if (nClientesCompram > nClientesTP1 + nClientesTP2 + nClientesTP3 + nClientesTP4) {
+        int soma = nClientesTP1 + nClientesTP2 + nClientesTP3 + nClientesTP4;
+        int dif = nClientesCompram - soma;
+        nClientesTP3 = nClientesTP3 + dif;
+    }
+
 
     int nClientesLevantaram = trunc(0.6 * nClientesCompram);
     int nClientesTL1 = trunc(0.3 * nClientesLevantaram);
@@ -637,9 +637,9 @@ int main(int argc, char** argv) {
         int diferenca = nClientesLevantaram - (nClientesTL1 + nClientesTL2 + nClientesTL3 + nClientesTL4);
         nClientesTL2 = nClientesTL2 + diferenca;
     }
-    
+
     int nClientesPrioritarios = trunc(0.05 * totalClientes);
-    
+
     srand(time(NULL));
 
     tempoChegadaClientes(totalClientes, clientesPrimeiroP, clientesSegundoP, clientesTerceiroP, clientesQuartoP);
@@ -650,14 +650,14 @@ int main(int argc, char** argv) {
     for (int i = 0; i < totalClientes; i++) {
         printf("\n Cliente %d: [%d][%d][%d][%d][%d]", matriz[i][0], matriz[i][1], matriz[i][2], matriz[i][3], matriz[i][4], matriz[i][5]);
     }
-    inicializacao(&clock, &evento, &nrCliente, &tempoProximaChegada, &estadoPA1, &estadoPA2, &estadoPA3, &estadoPA4, &estadoPA5, &estadoPA6, &estadoPA7, &estadoPA8, &estadoPA9, &estadoPA10, &tPartidaPA1, &tPartidaPA2, &tPartidaPA3, &tPartidaPA4, &tPartidaPA5, &tPartidaPA6, &tPartidaPA7, &tPartidaPA8, &tPartidaPA9, &tPartidaPA10, &estadoPP1, &estadoPP2, &estadoPP3, &estadoPP4, &tPartidaPP1, &tPartidaPP2, &tPartidaPP3, &tPartidaPP4, &estadoPL1, &estadoPL2, &tempoPartidaPL1, &tempoPartidaPL2, &tempoEspera, &filaPVendedores, &filaPP1, &filaPP2, &filaPP3, &filaPP4, &filaPLevantamento);
+    inicializacao(&clock, &nrCliente, &tempoProximaChegada, &estadoPA1, &estadoPA2, &estadoPA3, &estadoPA4, &estadoPA5, &estadoPA6, &estadoPA7, &estadoPA8, &estadoPA9, &estadoPA10, &tPartidaPA1, &tPartidaPA2, &tPartidaPA3, &tPartidaPA4, &tPartidaPA5, &tPartidaPA6, &tPartidaPA7, &tPartidaPA8, &tPartidaPA9, &tPartidaPA10, &estadoPP1, &estadoPP2, &estadoPP3, &estadoPP4, &tPartidaPP1, &tPartidaPP2, &tPartidaPP3, &tPartidaPP4, &estadoPL1, &estadoPL2, &tempoPartidaPL1, &tempoPartidaPL2, &tempoEspera, &filaPVendedores, &filaPP1, &filaPP2, &filaPP3, &filaPP4, &filaPLevantamento);
 
 
     while (TRUE) {
-        
+
         gestaoTempo(tempoProximaChegada, tPartidaPA1, tPartidaPA2, tPartidaPA3, tPartidaPA4, tPartidaPA5, tPartidaPA6, tPartidaPA7, tPartidaPA8, tPartidaPA9, tPartidaPA10, &clock, &evento);
         //printf("TempoProximaChegada = %d \n tPartidaPA1 = %d \n tPartidaPA2 = %d \n tPartidaPA3 = %d \n tPartidaPA4 = %d \n tPartidaPA5 = %d \n tPartidaPA6 = %d \n tPartidaPA7 = %d \n tPartidaPA8 = %d \n tPartidaPA9 = %d \n tPartidaPA10 = %d \n clock = %d \n evento = %d \n", tempoProximaChegada, tPartidaPA1, tPartidaPA2, tPartidaPA3, tPartidaPA4, tPartidaPA5, tPartidaPA6, tPartidaPA7, tPartidaPA8, tPartidaPA9, tPartidaPA10, clock, evento);
-        //printf("\n Clock: %d , Evento: %d , TPC: %d, ePA1: %d, tPtPA1: %d, ePA2: %d, tPtPA2: %d, ePA3: %d, tPtPA3: %d, ePA4: %d, tPtPA4: %d, ePA5: %d, tPtPA5: %d, ePA6: %d, tPtPA6: %d, ePA7: %d, tPtPA7: %d, ePA8: %d, tPtPA8: %d, ePA9: %d, tPtPA9: %d, ePA10: %d, tPtPA10: %d, tempoEspera: %d", clock, evento, tempoProximaChegada, estadoPA1, tPartidaPA1, estadoPA2, tPartidaPA2, estadoPA3, tPartidaPA3, estadoPA4, tPartidaPA4, estadoPA5, tPartidaPA5, estadoPA6, tPartidaPA6, estadoPA7, tPartidaPA7, estadoPA8, tPartidaPA8, estadoPA9, tPartidaPA9, estadoPA10, tPartidaPA10, tempoEspera);
+        
         if (evento == -1) {
             break;
         }
@@ -704,6 +704,7 @@ int main(int argc, char** argv) {
         if (terminar == 1) {
             break;
         }
+        printf("\n Clock: %d , Evento: %d , TPC: %d, ePA1: %d, tPtPA1: %d, ePA2: %d, tPtPA2: %d, ePA3: %d, tPtPA3: %d, ePA4: %d, tPtPA4: %d, \n ePA5: %d, tPtPA5: %d, ePA6: %d, tPtPA6: %d, ePA7: %d, tPtPA7: %d, ePA8: %d, tPtPA8: %d, ePA9: %d, tPtPA9: %d, ePA10: %d, tPtPA10: %d, tempoEspera: %d", clock, evento, tempoProximaChegada, estadoPA1, tPartidaPA1, estadoPA2, tPartidaPA2, estadoPA3, tPartidaPA3, estadoPA4, tPartidaPA4, estadoPA5, tPartidaPA5, estadoPA6, tPartidaPA6, estadoPA7, tPartidaPA7, estadoPA8, tPartidaPA8, estadoPA9, tPartidaPA9, estadoPA10, tPartidaPA10, tempoEspera);
         printf("NumClientes = %d", numClientes);
     }
 
